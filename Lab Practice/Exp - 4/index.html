@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beginner Flashcard App</title>
+  
+  <style>
+    /* 1. Overall Page Layout */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef2f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      width: 320px;
+    }
+
+    /* 2. Flashcard Styling */
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 40px 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card-title {
+      font-size: 0.85rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .card-text {
+      font-size: 1.25rem;
+      color: #333;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    /* Active state when answer is showing */
+    .card.revealed {
+      background-color: #e8f5e9;
+    }
+
+    .hint-text {
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-top: 15px;
+    }
+
+    /* 3. Button Styling */
+    .btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- The Flashcard -->
+    <div class="card" id="flashcard">
+      <span class="card-title" id="cardLabel">Question</span>
+      <p class="card-text" id="cardText">Loading question...</p>
+      <span class="hint-text">(Click card to flip)</span>
+    </div>
+
+    <!-- Next Question Button -->
+    <button class="btn" id="nextBtn">Next Question</button>
+  </div>
+
+  <!-- Linking the JavaScript File -->
+  <script src="script.js"></script>
+
+</body>
+</html>
