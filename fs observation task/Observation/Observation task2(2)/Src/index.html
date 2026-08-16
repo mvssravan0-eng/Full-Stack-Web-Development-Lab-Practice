@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Profile App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="wrapper">
+    <h1>Student Profile Card</h1>
+
+    <form id="studentForm">
+      <div class="field">
+        <label for="sName">Name</label>
+        <input type="text" id="sName" required>
+      </div>
+
+      <div class="field">
+        <label for="sRoll">Roll Number</label>
+        <input type="text" id="sRoll" required>
+      </div>
+
+      <div class="field">
+        <label for="sDept">Department</label>
+        <input type="text" id="sDept" required>
+      </div>
+
+      <div class="field">
+        <label for="sCgpa">CGPA</label>
+        <input type="number" id="sCgpa" min="0" max="10" step="0.01" required>
+      </div>
+
+      <button type="submit">Show Profile</button>
+    </form>
+
+    <!-- Dynamically generated profile will be injected here -->
+    <section id="profileContainer"></section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
