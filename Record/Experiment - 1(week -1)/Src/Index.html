@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Static Webpage</title>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header>
+    <h1>My Website Header</h1>
+    <nav>
+      <a href="#home">Home</a> |
+      <a href="#about">About</a> |
+      <a href="#services">Services</a> |
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <hr>
+
+  <!-- Main Content Area -->
+  <main>
+
+    <!-- Home Section -->
+    <section id="home">
+      <h2>Welcome to My Webpage</h2>
+      <p>This is a static webpage built purely using HTML tags without external CSS or JavaScript.</p>
+    </section>
+
+    <hr>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Here is a list of features included on this site:</p>
+      <ul>
+        <li>Semantic HTML structure</li>
+        <li>Organized content sections</li>
+        <li>Native HTML input forms</li>
+        <li>Data structured with tables</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <!-- Services Section -->
+    <section id="services">
+      <h2>Our Services & Pricing</h2>
+      <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Web Design</td>
+            <td>Creating clean static layouts.</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>HTML Coding</td>
+            <td>Semantic HTML5 page structuring.</td>
+            <td>$75</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr>
+
+    <!-- Contact Form Section -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form action="#" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="subject">Subject:</label><br>
+        <select id="subject" name="subject">
+          <option value="general">General Inquiry</option>
+          <option value="support">Support</option>
+          <option value="feedback">Feedback</option>
+        </select><br><br>
+
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="5" cols="30" required></textarea><br><br>
+
+        <input type="submit" value="Submit Form">
+      </form>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 My Static HTML Page. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
