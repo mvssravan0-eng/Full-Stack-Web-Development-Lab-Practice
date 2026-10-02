@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Color Changer</title>
+</head>
+<body>
+
+<h1 id="headingText">Change My Color!</h1>
+<div>
+  <label>Color Name or Hex:</label>
+  <input type="text" id="colorInput" placeholder="e.g. red or #ff0000">
+  <button onclick="applyColor()">Apply</button>
+</div>
+<p id="feedbackMsg" style="font-weight: bold;"></p>
+
+<script>
+function applyColor() {
+  const inputVal = document.getElementById("colorInput").value.trim();
+  const heading = document.getElementById("headingText");
+  const msg = document.getElementById("feedbackMsg");
+
+  if (!inputVal) {
+    msg.style.color = "red";
+    msg.textContent = "Validation Error: Input cannot be empty!";
+    return;
+  }
+
+  if (CSS.supports("color", inputVal)) {
+    heading.style.color = inputVal;
+    heading.textContent = `Color updated to ${inputVal}!`;
+    msg.style.color = "green";
+    msg.textContent = "Success: Color applied.";
+  } else {
+    msg.style.color = "red";
+    msg.textContent = `Validation Error: '${inputVal}' is not a valid color!`;
+  }
+}
+</script>
+
+</body>
+</html>

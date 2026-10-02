@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Price Calculator</title>
+</head>
+<body>
+  <h2>Dynamic Product Price</h2>
+  <label for="prodName">Product:</label>
+  <input id="prodName" type="text" placeholder="Product Name" required><br><br>
+  
+  <label for="prodQty">Quantity:</label>
+  <input id="prodQty" type="number" placeholder="Enter Quantity" required><br><br>
+  
+  <label for="prodPrice">Unit Price:</label>
+  <input id="prodPrice" type="number" placeholder="Enter Price" required><br><br>
+  
+  <button onclick="calculateTotal()">Calculate Total</button>
+
+  <h3 id="resultText"></h3>
+
+  <script>
+    function calculateTotal() {
+      const name = document.getElementById("prodName").value.trim();
+      const qty = parseInt(document.getElementById("prodQty").value, 10);
+      const price = parseFloat(document.getElementById("prodPrice").value);
+      const resultEl = document.getElementById("resultText");
+
+      if (!name) {
+        resultEl.style.color = "red";
+        resultEl.textContent = "Error: Please enter a valid product name.";
+        return;
+      }
+      if (!qty || isNaN(qty) || qty <= 0) {
+        resultEl.style.color = "red";
+        resultEl.textContent = "Error: Please enter a valid quantity (> 0).";
+        return;
+      }
+      if (!price || isNaN(price) || price <= 0) {
+        resultEl.style.color = "red";
+        resultEl.textContent = "Error: Please enter a valid price (> 0).";
+        return;
+      }
+
+      const total = (qty * price).toFixed(2);
+      resultEl.style.color = "green";
+      resultEl.textContent = `Total cost for ${name} is ₹${total}`;
+    }
+  </script>
+</body>
+</html>
