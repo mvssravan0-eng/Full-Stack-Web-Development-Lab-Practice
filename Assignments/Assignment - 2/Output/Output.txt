@@ -1,0 +1,360 @@
+
+-------------------------------------------
+1. INSERTING STUDENT RECORDS
+-------------------------------------------
+Records inserted successfully.
+
+-------------------------------------------
+2. DISPLAY ALL STUDENTS
+-------------------------------------------
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e3'),
+    rollNo: '23CM001',
+    name: 'Ravi Kumar',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 85,
+    email: 'ravi@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e4'),
+    rollNo: '23CM002',
+    name: 'Ananya Sharma',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 92,
+    email: 'ananya@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e5'),
+    rollNo: '23ECE015',
+    name: 'Rahul Verma',
+    branch: 'ECE',
+    year: 2,
+    marks: 45,
+    email: 'rahul@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e6'),
+    rollNo: '23CM045',
+    name: 'Sneha Reddy',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 78,
+    email: 'sneha@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e7'),
+    rollNo: '23ME008',
+    name: 'Vikram Singh',
+    branch: 'MECH',
+    year: 4,
+    marks: 68,
+    email: 'vikram@example.com'
+  }
+]
+
+-------------------------------------------
+3. DISPLAY STUDENTS FROM BRANCH: CSE-AIML
+-------------------------------------------
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e3'),
+    rollNo: '23CM001',
+    name: 'Ravi Kumar',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 85,
+    email: 'ravi@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e4'),
+    rollNo: '23CM002',
+    name: 'Ananya Sharma',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 92,
+    email: 'ananya@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e6'),
+    rollNo: '23CM045',
+    name: 'Sneha Reddy',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 78,
+    email: 'sneha@example.com'
+  }
+]
+
+-------------------------------------------
+4. DISPLAY STUDENTS SCORING > 75 MARKS
+-------------------------------------------
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e3'),
+    rollNo: '23CM001',
+    name: 'Ravi Kumar',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 85,
+    email: 'ravi@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e4'),
+    rollNo: '23CM002',
+    name: 'Ananya Sharma',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 92,
+    email: 'ananya@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e6'),
+    rollNo: '23CM045',
+    name: 'Sneha Reddy',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 78,
+    email: 'sneha@example.com'
+  }
+]
+
+-------------------------------------------
+5. SEARCH STUDENT BY ROLL NO: 23CM001
+-------------------------------------------
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e3'),
+    rollNo: '23CM001',
+    name: 'Ravi Kumar',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 85,
+    email: 'ravi@example.com'
+  }
+]
+
+-------------------------------------------
+6. SEARCH STUDENTS BY CONDITION (year = 3)
+-------------------------------------------
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e3'),
+    rollNo: '23CM001',
+    name: 'Ravi Kumar',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 85,
+    email: 'ravi@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e4'),
+    rollNo: '23CM002',
+    name: 'Ananya Sharma',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 92,
+    email: 'ananya@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e6'),
+    rollNo: '23CM045',
+    name: 'Sneha Reddy',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 78,
+    email: 'sneha@example.com'
+  }
+]
+
+-------------------------------------------
+7. UPDATE MARKS FOR ROLL NO 23CM001 TO 90
+-------------------------------------------
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e3'),
+    rollNo: '23CM001',
+    name: 'Ravi Kumar',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 90,
+    email: 'ravi@example.com'
+  }
+]
+
+-------------------------------------------
+8. UPDATE EMAIL AND BRANCH FOR ROLL NO 23ME008
+-------------------------------------------
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e7'),
+    rollNo: '23ME008',
+    name: 'Vikram Singh',
+    branch: 'MECH-ROBOTICS',
+    year: 4,
+    marks: 68,
+    email: 'vikram.singh@newmail.com'
+  }
+]
+
+-------------------------------------------
+9. DELETE STUDENT WITH ROLL NO: 23ECE015
+-------------------------------------------
+Record deleted successfully.
+
+-------------------------------------------
+10. DISPLAY STUDENTS IN DESCENDING ORDER OF MARKS
+-------------------------------------------
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e4'),
+    rollNo: '23CM002',
+    name: 'Ananya Sharma',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 92,
+    email: 'ananya@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e3'),
+    rollNo: '23CM001',
+    name: 'Ravi Kumar',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 90,
+    email: 'ravi@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e6'),
+    rollNo: '23CM045',
+    name: 'Sneha Reddy',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 78,
+    email: 'sneha@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e7'),
+    rollNo: '23ME008',
+    name: 'Vikram Singh',
+    branch: 'MECH-ROBOTICS',
+    year: 4,
+    marks: 68,
+    email: 'vikram.singh@newmail.com'
+  }
+]
+
+-------------------------------------------
+11. CREATE INDEX ON rollNo AND DEMONSTRATE EXPLAIN
+-------------------------------------------
+Index created on rollNo.
+
+Execution Stats with Index:
+{
+  executionSuccess: true,
+  nReturned: 1,
+  executionTimeMillis: 13,
+  executionTimeMicros: 13378,
+  totalKeysExamined: 1,
+  totalDocsExamined: 1,
+  executionStages: {
+    isCached: false,
+    stage: 'EXPRESS_IXSCAN',
+    keyPattern: {
+      rollNo: 1
+    },
+    indexName: 'rollNo_1',
+    nReturned: 1,
+    executionTimeMillisEstimate: 2,
+    keysExamined: 1,
+    docsExamined: 1
+  }
+}
+
+-------------------------------------------
+REAL-TIME EXTENSION QUERIES
+-------------------------------------------
+
+a. Students scoring above 80:
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e3'),
+    rollNo: '23CM001',
+    name: 'Ravi Kumar',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 90,
+    email: 'ravi@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e4'),
+    rollNo: '23CM002',
+    name: 'Ananya Sharma',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 92,
+    email: 'ananya@example.com'
+  }
+]
+
+b. Students scoring below 50:
+[]
+
+c. Highest-scoring student:
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e4'),
+    rollNo: '23CM002',
+    name: 'Ananya Sharma',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 92,
+    email: 'ananya@example.com'
+  }
+]
+
+d. Students sorted by marks (Descending):
+[
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e4'),
+    rollNo: '23CM002',
+    name: 'Ananya Sharma',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 92,
+    email: 'ananya@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e3'),
+    rollNo: '23CM001',
+    name: 'Ravi Kumar',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 90,
+    email: 'ravi@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e6'),
+    rollNo: '23CM045',
+    name: 'Sneha Reddy',
+    branch: 'CSE-AIML',
+    year: 3,
+    marks: 78,
+    email: 'sneha@example.com'
+  },
+  {
+    _id: ObjectId('6ac24b8cdcaf93b19de117e7'),
+    rollNo: '23ME008',
+    name: 'Vikram Singh',
+    branch: 'MECH-ROBOTICS',
+    year: 4,
+    marks: 68,
+    email: 'vikram.singh@newmail.com'
+  }
+]
+
+===========================================
+ASSIGNMENT EXECUTED SUCCESSFULLY!
+===========================================
