@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Exploration: Content, Style & Attribute Mutability</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f1f5f9; color: #0f172a; padding: 30px 20px; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .card { background: #ffffff; border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+    h1 { color: #1e3a8a; font-size: 26px; margin-bottom: 8px; }
+    h2 { color: #0f172a; font-size: 18px; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+    p { color: #475569; font-size: 14px; margin-bottom: 12px; }
+    .theory-box { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 14px 16px; border-radius: 4px; font-size: 13.5px; color: #1e40af; margin-bottom: 16px; }
+    
+    /* Interactive Demo Grid */
+    .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 768px) { .demo-grid { grid-template-columns: 1fr; } }
+    
+    .control-panel { display: flex; flex-direction: column; gap: 14px; }
+    .control-section { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; }
+    .control-section h3 { font-size: 14px; color: #334155; margin-bottom: 8px; font-weight: 700; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    button { padding: 7px 14px; font-size: 12.5px; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; transition: 0.2s; background: #2563eb; color: #fff; }
+    button:hover { background: #1d4ed8; }
+    button.alt-btn { background: #475569; }
+    button.alt-btn:hover { background: #334155; }
+    button.danger-btn { background: #dc2626; }
+    button.danger-btn:hover { background: #b91c1c; }
+    
+    /* Target Showcase Element */
+    .preview-panel { display: flex; flex-direction: column; justify-content: center; }
+    .target-box { background: #f8fafc; border: 2px solid #94a3b8; border-radius: 8px; padding: 20px; text-align: center; transition: all 0.3s ease; }
+    .target-heading { font-size: 20px; color: #0f172a; margin-bottom: 8px; }
+    .target-para { font-size: 13px; color: #64748b; margin-bottom: 12px; }
+    .target-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 2px solid #cbd5e1; }
+    .target-link { display: inline-block; font-size: 12px; color: #2563eb; text-decoration: underline; margin-bottom: 10px; }
+    
+    /* Dynamic Classes */
+    .theme-highlight { background: #fef08a !important; border-color: #ca8a04 !important; }
+    .theme-dark { background: #1e293b !important; color: #f8fafc !important; border-color: #475569 !important; }
+    .theme-dark .target-heading { color: #f8fafc !important; }
+    .theme-dark .target-para { color: #94a3b8 !important; }
+
+    /* Event Audit Logger */
+    .audit-logger { background: #0f172a; color: #a7f3d0; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 12px; max-height: 120px; overflow-y: auto; margin-top: 14px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      <h1>Understanding the Document Object Model (DOM)</h1>
+      <div class="theory-box">
+        <strong>What is the DOM?</strong> The Document Object Model is a programming interface for web documents. 
+        It represents the HTML page as a tree of objects (nodes), enabling scripting languages like JavaScript to 
+        programmatically access, modify, delete, and add element contents, inline CSS styles, and tag attributes.
+      </div>
+
+      <div class="demo-grid">
+        <!-- Control Panel -->
+        <div class="control-panel">
+          
+          <!-- 1. Change Content -->
+          <div class="control-section">
+            <h3>1. Content Mutation (innerHTML & textContent)</h3>
+            <div class="btn-group">
+              <button onclick="changeContent('Welcome Sravan!', 'Updated via textContent property.')">Text 1</button>
+              <button onclick="changeContent('Full Stack Web Dev', 'Mastering modern client-side DOM manipulation.')">Text 2</button>
+              <button class="alt-btn" onclick="resetContent()">Reset Content</button>
+            </div>
+          </div>
+
+          <!-- 2. Change Style -->
+          <div class="control-section">
+            <h3>2. Style Mutation (element.style.*)</h3>
+            <div class="btn-group">
+              <button style="background: #059669;" onclick="changeStyle('#059669', '#ecfdf5', '22px')">Emerald Theme</button>
+              <button style="background: #7c3aed;" onclick="changeStyle('#7c3aed', '#f5f3ff', '18px')">Purple Theme</button>
+              <button style="background: #ea580c;" onclick="changeStyle('#ea580c', '#fff7ed', '24px')">Amber Theme</button>
+              <button class="alt-btn" onclick="resetStyle()">Reset Style</button>
+            </div>
+          </div>
+
+          <!-- 3. Change Attributes -->
+          <div class="control-section">
+            <h3>3. Attribute Mutation (setAttribute & properties)</h3>
+            <div class="btn-group">
+              <button onclick="toggleAttributeClass('theme-highlight')">Toggle Highlight Class</button>
+              <button onclick="toggleAttributeClass('theme-dark')">Toggle Dark Class</button>
+              <button onclick="changeLinkAttribute()">Change URL Attribute</button>
+              <button class="danger-btn" onclick="toggleDisableAttribute()">Toggle Disabled</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Target Showcase Live Preview -->
+        <div class="preview-panel">
+          <div id="targetElement" class="target-box" title="Interactive DOM Target Container">
+            <img id="avatarImg" class="target-img" src="https://picsum.photos/100/100" alt="Avatar Graphic">
+            <h3 id="targetHeading" class="target-heading">Initial DOM Title</h3>
+            <p id="targetPara" class="target-para">Initial descriptive text node inside paragraph.</p>
+            <a id="targetLink" class="target-link" href="https://anits.edu.in" target="_blank">Target Link: anits.edu.in</a><br>
+            <button id="actionBtn" style="margin-top: 6px;">Target Action Button</button>
+          </div>
+
+          <!-- Live Event Log -->
+          <div id="eventLogger" class="audit-logger">
+            [DOM Log] Ready. Awaiting user interaction...
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const heading = document.getElementById("targetHeading");
+    const para = document.getElementById("targetPara");
+    const targetBox = document.getElementById("targetElement");
+    const link = document.getElementById("targetLink");
+    const actionBtn = document.getElementById("actionBtn");
+    const logger = document.getElementById("eventLogger");
+
+    function logAction(msg) {
+      const time = new Date().toLocaleTimeString();
+      logger.innerHTML += `<br>[${time}] ${msg}`;
+      logger.scrollTop = logger.scrollHeight;
+    }
+
+    // 1. Content Modification
+    function changeContent(newTitle, newDesc) {
+      heading.textContent = newTitle;
+      para.textContent = newDesc;
+      logAction(`Mutated Content: heading.textContent='${newTitle}'`);
+    }
+
+    function resetContent() {
+      heading.textContent = "Initial DOM Title";
+      para.textContent = "Initial descriptive text node inside paragraph.";
+      logAction("Reset Content to defaults");
+    }
+
+    // 2. Style Modification
+    function changeStyle(color, bg, size) {
+      heading.style.color = color;
+      targetBox.style.backgroundColor = bg;
+      heading.style.fontSize = size;
+      logAction(`Mutated Styles: color=${color}, bg=${bg}, fontSize=${size}`);
+    }
+
+    function resetStyle() {
+      heading.style.color = "";
+      targetBox.style.backgroundColor = "";
+      heading.style.fontSize = "";
+      logAction("Reset Inline Styles");
+    }
+
+    // 3. Attribute Modification
+    function toggleAttributeClass(className) {
+      targetBox.classList.toggle(className);
+      logAction(`Toggled Class Attribute: classList.toggle('${className}')`);
+    }
+
+    function changeLinkAttribute() {
+      if (link.getAttribute("href") === "https://anits.edu.in") {
+        link.setAttribute("href", "https://github.com/vssravanm");
+        link.textContent = "Target Link: github.com/vssravanm";
+        logAction("Mutated Attribute: setAttribute('href', 'github.com/...')");
+      } else {
+        link.setAttribute("href", "https://anits.edu.in");
+        link.textContent = "Target Link: anits.edu.in";
+        logAction("Mutated Attribute: setAttribute('href', 'anits.edu.in')");
+      }
+    }
+
+    function toggleDisableAttribute() {
+      if (actionBtn.hasAttribute("disabled")) {
+        actionBtn.removeAttribute("disabled");
+        actionBtn.textContent = "Target Action Button (Enabled)";
+        logAction("Mutated Attribute: removeAttribute('disabled')");
+      } else {
+        actionBtn.setAttribute("disabled", "true");
+        actionBtn.textContent = "Target Action Button (Disabled)";
+        logAction("Mutated Attribute: setAttribute('disabled', 'true')");
+      }
+    }
+  </script>
+
+</body>
+</html>

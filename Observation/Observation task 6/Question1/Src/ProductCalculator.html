@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Product Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #e0f2fe, #f0fdf4);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .calculator-card {
+      background: #ffffff;
+      max-width: 460px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+    }
+    h2 {
+      color: #0f172a;
+      text-align: center;
+      margin-bottom: 6px;
+      font-size: 22px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #334155;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .result-box {
+      margin-top: 20px;
+      padding: 16px;
+      background: #f8fafc;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .result-label {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+    .total-amount {
+      font-size: 24px;
+      font-weight: 700;
+      color: #059669;
+    }
+    .item-summary {
+      font-size: 13px;
+      color: #334155;
+      margin-top: 4px;
+      font-style: italic;
+    }
+    .error-msg {
+      color: #dc2626;
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator-card">
+    <h2>Product Price Calculator</h2>
+    <p class="subtitle">Real-Time Dynamic Total Calculation via Event Listeners</p>
+
+    <div class="form-group">
+      <label for="productName">Product Name</label>
+      <input type="text" id="productName" placeholder="e.g. Wireless Mouse" value="Laptop">
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" min="1" placeholder="Enter quantity" value="2">
+    </div>
+
+    <div class="form-group">
+      <label for="price">Unit Price (₹)</label>
+      <input type="number" id="price" min="0" step="0.01" placeholder="Enter unit price" value="45000">
+    </div>
+
+    <div class="result-box">
+      <div class="result-label">Calculated Order Total:</div>
+      <div id="totalAmount" class="total-amount">₹90,000.00</div>
+      <div id="itemSummary" class="item-summary">2 × Laptop @ ₹45,000.00 each</div>
+      <div id="errorMessage" class="error-msg" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script>
+    // DOM Element References
+    const productNameInput = document.getElementById("productName");
+    const quantityInput = document.getElementById("quantity");
+    const priceInput = document.getElementById("price");
+    const totalAmountDisplay = document.getElementById("totalAmount");
+    const itemSummaryDisplay = document.getElementById("itemSummary");
+    const errorMessageDisplay = document.getElementById("errorMessage");
+
+    // Dynamic Price Calculation Function
+    function calculateTotal() {
+      const name = productNameInput.value.trim();
+      const qtyStr = quantityInput.value.trim();
+      const priceStr = priceInput.value.trim();
+
+      // Reset Error State
+      errorMessageDisplay.style.display = "none";
+      errorMessageDisplay.textContent = "";
+
+      // Validation Guards
+      if (!name) {
+        showError("Please enter a product name.");
+        return;
+      }
+
+      if (!qtyStr) {
+        showError("Please enter quantity.");
+        return;
+      }
+
+      if (!priceStr) {
+        showError("Please enter unit price.");
+        return;
+      }
+
+      const qty = parseFloat(qtyStr);
+      const price = parseFloat(priceStr);
+
+      if (isNaN(qty) || qty <= 0) {
+        showError("Quantity must be a positive number greater than 0.");
+        return;
+      }
+
+      if (isNaN(price) || price < 0) {
+        showError("Price must be a non-negative number.");
+        return;
+      }
+
+      // Compute Total
+      const total = qty * price;
+
+      // Update DOM dynamically without page reload
+      totalAmountDisplay.textContent = "₹" + total.toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      itemSummaryDisplay.textContent = `${qty} × ${name} @ ₹${price.toLocaleString("en-IN", { minimumFractionDigits: 2 })} each`;
+    }
+
+    function showError(msg) {
+      totalAmountDisplay.textContent = "₹0.00";
+      itemSummaryDisplay.textContent = "Calculation suspended";
+      errorMessageDisplay.textContent = msg;
+      errorMessageDisplay.style.display = "block";
+    }
+
+    // Attach Event Listeners to calculate dynamically whenever inputs change
+    productNameInput.addEventListener("input", calculateTotal);
+    quantityInput.addEventListener("input", calculateTotal);
+    priceInput.addEventListener("input", calculateTotal);
+
+    // Initial calculation on page load
+    calculateTotal();
+  </script>
+
+</body>
+</html>

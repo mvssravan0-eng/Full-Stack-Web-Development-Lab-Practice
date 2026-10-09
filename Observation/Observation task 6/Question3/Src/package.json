@@ -1,0 +1,14 @@
+{
+  "name": "obtask6-question3-student-server",
+  "version": "1.0.0",
+  "description": "Express.js Student Server with multi-route HTTP handling",
+  "main": "studentServer.js",
+  "scripts": {
+    "start": "node studentServer.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "author": "V S Sravan M (A24126552268)",
+  "license": "ISC"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "obtask6-question2-file-management",
+  "version": "1.0.0",
+  "description": "Node.js File Management Application using File System module",
+  "main": "fileManager.js",
+  "scripts": {
+    "start": "node fileManager.js"
+  },
+  "author": "V S Sravan M (A24126552268)",
+  "license": "ISC"
+}
